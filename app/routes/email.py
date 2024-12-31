@@ -45,8 +45,8 @@ async def inbound_email(request: Request, x_twilio_signature: str = Header(None)
         # Parse form data from the request
         form_data = await request.form()
         payload = {key: value for key, value in form_data.items()}
-
-        raw_body = await request.body()
+        print(payload,"payload")
+        # raw_body = await request.body()
         # if not verify_signature(
         #     headers={"X-Twilio-Signature": x_twilio_signature},
         #     payload=raw_body.decode("utf-8"),
