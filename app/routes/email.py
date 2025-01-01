@@ -37,11 +37,12 @@ async def receive_email(data: dict):
 router = APIRouter()
 
 @router.post("/webhook/inbound")
-async def inbound_email(request: Request, x_twilio_signature: str = Header(None)):
+async def inbound_email(request: Request):
     """
     Webhook to receive incoming emails from Twilio SendGrid.
     """
     try:
+        print("request in webhook",request)
         # Parse form data from the request
         form_data = await request.form()
         payload = {key: value for key, value in form_data.items()}
@@ -55,8 +56,8 @@ async def inbound_email(request: Request, x_twilio_signature: str = Header(None)
         #     raise HTTPException(status_code=401, detail="Invalid signature")
 
         # Process the email
-        result = process_incoming_email(payload)
-        return result
+        # result = process_incoming_email(payload)
+        return payload
     except HTTPException as e:
         raise e
     except Exception as e:
