@@ -44,9 +44,9 @@ async def inbound_email(request: Request):
     try:
         print("request in webhook",request)
         # Parse form data from the request
-        form_data = await request.form()
-        payload = {key: value for key, value in form_data.items()}
-        print(payload,"payload")
+        # form_data = await request.form()
+        # payload = {key: value for key, value in form_data.items()}
+        # print(payload,"payload")
         # raw_body = await request.body()
         # if not verify_signature(
         #     headers={"X-Twilio-Signature": x_twilio_signature},
@@ -57,7 +57,7 @@ async def inbound_email(request: Request):
 
         # Process the email
         # result = process_incoming_email(payload)
-        return payload
+        return {"status": "success", "message": "Email received and processed"}
     except HTTPException as e:
         raise e
     except Exception as e:
